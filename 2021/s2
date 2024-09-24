@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+//scored 15/15
+
+public class Main {
+	public static void main(String[]args) {
+		Scanner input = new Scanner(System.in);
+		int m = input.nextInt();
+		int n = input.nextInt();
+		int c = input.nextInt();
+		String[] schanges = new String[c];
+		int[] ichanges = new int[c];
+		int[] rows = new int[m];
+		int[] columns = new int[n];
+		int count = 0;
+		
+		for(int i = 0; i<c; i++) {
+			schanges[i] = input.next();
+			ichanges[i] = input.nextInt();
+		}
+		
+		input.close();
+		
+		for(int i = 0; i<c; i++) {
+			if(schanges[i].equals("R")) {
+				rows[ichanges[i]-1]++;
+			}else {
+				columns[ichanges[i]-1]++;
+
+			}
+		}
+		for(int i = 0; i<m;i++) {
+			for(int j = 0; j<n; j++) {
+				if((rows[i]+columns[j])%2 ==1) {
+					count++;
+				}
+			}
+		}
+		System.out.println(count);
+	}
+}
