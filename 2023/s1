@@ -1,0 +1,68 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+	public static void main(String[] args) throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int n = Integer.parseInt(br.readLine());
+		String f = br.readLine();
+		String s = br.readLine();
+		String[] first = f.split(" ");
+		String[] second = s.split(" ");
+		//for first, every even is up
+		//for second, every odd is up, even down
+		//if up for first/down for second the up/down matters
+		int temp = 0;
+		int sides = 0;
+		for(int i = 0; i<first.length;i++) {
+			//need to program exceptions for side edge cases
+			temp = 0;
+			if(first[i].equals("1")) {
+				temp = 3;
+				if(i != 0) {
+					if(first[i-1].equals("1")) {
+						temp--;
+						
+					}
+				}
+				if(i != (first.length - 1)) {
+					if(first[i+1].equals("1")) {
+						temp--;
+					}
+				}
+				if(i%2 == 0) {
+					if(second[i].equals("1")) {
+						temp--;
+					}
+				}
+			}
+			sides += temp;
+		}
+		for(int i = 0; i<second.length;i++) {
+			//need to program exceptions for side edge cases
+			temp = 0;
+			if(second[i].equals("1")) {
+				temp = 3;
+				if(i != 0) {
+					if(second[i-1].equals("1")) {
+						temp--;
+						
+					}
+				}
+				if(i != (second.length - 1)) {
+					if(second[i+1].equals("1")) {
+						temp--;
+					}
+				}
+				if(i%2 == 0) {
+					if(first[i].equals("1")) {
+						temp--;
+					}
+				}
+			}
+			sides += temp;
+		}
+		System.out.println(sides);
+	}
+}
