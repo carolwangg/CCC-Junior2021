@@ -1,0 +1,56 @@
+//Modern Art CCC2021 by Carol Wang
+//Trial 1
+//scored 15/15
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		int count = 0;
+		Scanner input = new Scanner(System.in);
+		int m = input.nextInt();
+		int n = input.nextInt();
+		int k = input.nextInt();
+		char[] dirs = new char[k];
+		int[] nums = new int[k];
+		boolean black =false;
+		boolean gold =true;
+		for(int i =0; i<k; i++) {
+			dirs[i] = input.next().charAt(0);
+			nums[i] = (input.nextInt()) - 1;
+		}
+		boolean[][] canvas = new boolean[n][m];
+		for(int i = 0; i<n; i++) {
+			for(int j = 0; j<m; j++) {
+				canvas[i][j] = black;
+			}
+		}
+		for(int i = 0; i<k; i++) {
+			if(dirs[i] == 'C') {
+				for(int j = 0; j<m; j++) {
+					if(canvas[nums[i]][j] == black) {
+						canvas[nums[i]][j] = gold;
+					}else {
+						canvas[nums[i]][j] = black;
+					}
+				}
+			}else if (dirs[i] == 'R'){
+				for(int j = 0; j<n; j++) {
+					if(canvas[j][nums[i]] == black) {
+						canvas[j][nums[i]] = gold;
+					}else {
+						canvas[j][nums[i]] = black;
+					}
+				}
+			}
+		}
+
+		for(int i = 0; i<n; i++) {
+			for (int j = 0; j<m; j++)
+			if(canvas[i][j]==gold) {
+				count++;
+			}
+		}
+		System.out.println(count);
+	}
+
+}
