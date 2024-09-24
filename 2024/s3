@@ -1,0 +1,104 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Scanner;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+
+public class Main {
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		PrintWriter pw = new PrintWriter(new OutputStreamWriter(System.out));
+		Scanner input = new Scanner(System.in);
+		HashMap<String, ArrayList<Integer>> map = new HashMap<String, ArrayList<Integer>>();
+		ArrayList<String> command = new ArrayList<String>();
+		String dir = "";
+		String possible = "YES";
+		
+		int n = input.nextInt();
+		String[][] array = new String[2][n];
+		int[] index = new int[n];
+		int count = 0;
+		for (int i = 0; i < 2; i++) {
+			for (int j = 0; j < n; j++) {
+				array[i][j] = input.next();
+			}
+		}		
+		
+		for (int i = 0; i < n; i++) {
+			if(map.containsKey(array[0][i])) {
+				map.get(array[0][i]).add(i);
+			}else {
+				ArrayList<Integer> temp= new ArrayList<Integer>();
+				temp.add(i);
+				map.put(array[0][i], temp);
+			}
+		}
+		
+		for (int i = 0; i < n; i++) {
+			if (map.containsKey(array[1][i])){
+				int temp = map.get(array[1][i]).get(count);
+				if (i > 0) {
+					if (array[1][i-1] != array[1][i]) {
+						if (index[i-1] > temp) {
+							while (index[i-1] > temp) {
+								count++;
+								if (count >= map.get(array[1][i]).size()) {
+									//return and output false
+									possible = "NO";
+									break;
+								}
+								temp = map.get(array[1][i]).get(count);
+							}
+						}
+					}
+				}
+				index[i] = temp;
+				count = 0;
+			}else {
+				possible = "NO";
+				break;
+			}	
+		}
+		System.out.println(possible);
+		int start = 0;
+		int end = 0;
+		if (possible.equals("YES")){
+			for (int i = 0; i < n; i++) {
+				if (i != n-1) {
+					if(!(index[i]==index[i+1])) {
+						if (index[i]>i) {
+							dir = "L";
+							start = i;
+							end = index[i];
+						}else {
+							dir = "R";
+							start = i;
+							end = index[i];
+						}
+						command.add(dir+" "+start+" "+end);
+					}
+				}else {
+					if (index[i]>i) {
+						dir = "L";
+						start = i;
+						end = index[i];
+					}else {
+						dir = "R";
+						start = index[i];
+						end = i;
+					}
+					command.add(dir+" "+start+" "+end);
+				}
+			}
+			System.out.println(command.size());
+			for (int j = 0; j < command.size(); j++) {
+				System.out.println(command.get(command.size()-j-1));
+			}
+		}
+	}
+}
