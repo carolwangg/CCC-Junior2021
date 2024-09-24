@@ -1,0 +1,43 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+//scored 15/15
+
+public class Main {
+	public static ArrayList<Integer> primes = new ArrayList<Integer>();
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		int t = input.nextInt();
+		int[] n = new int[t];
+		for (int i = 0; i < t; i++) {
+			n[i] = input.nextInt();
+		}
+		for (int i = 0; i < t; i++) {
+			for(int j = 2; j<Math.floor(n[i]);j++) {
+				if(checkPrime(j)) {
+					if(checkPrime(2*n[i]-j)) {
+						System.out.print(j+" "+(2*n[i]-j)+" ");
+						break;
+					}
+				}
+			}
+			System.out.println();
+		}
+	}
+	public static boolean checkPrime(int n) {
+		boolean prime = true;
+		if (!(primes.contains(n))){
+			for (int i = 2; i <= Math.floor(Math.sqrt(n)); i++) {
+				if(n%i==0) {
+					prime = false;
+					break;
+				}
+			}
+			if (prime) {
+				primes.add(n);
+			}
+		}	
+		return prime;
+	}
+}
