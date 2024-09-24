@@ -1,0 +1,20 @@
+/cccJ1 2020 Dog Treats by Carol Wang
+//Trial 1
+//scored 15/15
+
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		int S = input.nextInt();
+		int M = input.nextInt();
+		int L = input.nextInt();
+		int happyscore =S+(2*M)+(3*L);
+		if(happyscore>=10) {
+			System.out.println("happy");
+		}else {
+			System.out.println("sad");
+		}
+	}
+}
