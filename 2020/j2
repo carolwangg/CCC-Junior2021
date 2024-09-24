@@ -1,0 +1,24 @@
+import java.util.Scanner;
+//scored 15/15
+public class Main {
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		int p = input.nextInt();
+		int n = input.nextInt();
+		int r = input.nextInt();
+		int count = 0;
+		int total = n;
+		int total1 = n;
+		while(true) {
+			total = total*r;
+			total1 = total1+total;
+			if (total1 > p) {
+				count++;
+				break;
+			}else {
+				count++;
+			}
+		}
+		System.out.println(count);
+	}
+}
