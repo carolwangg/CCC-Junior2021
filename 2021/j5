@@ -1,6 +1,6 @@
 //Modern Art CCC2021 by Carol Wang
 //Trial 1
-//scored 15/15
+//scored 10/15 - time limit exceeded
 import java.util.Scanner;
 
 public class Main {
