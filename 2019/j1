@@ -1,0 +1,29 @@
+//speedrunning CCC 2019 junior
+//J1 Winning Score 2019
+//scored 15/15
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+public class Main {
+	public static void main(String[]args) throws IOException {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		int applescore = 0;
+		int bananascore = 0;
+		
+		applescore+=Integer.parseInt(reader.readLine())*3;
+		applescore+=Integer.parseInt(reader.readLine())*2;
+		applescore+=Integer.parseInt(reader.readLine());
+		
+		bananascore+=Integer.parseInt(reader.readLine())*3;
+		bananascore+=Integer.parseInt(reader.readLine())*2;
+		bananascore+=Integer.parseInt(reader.readLine());
+		
+		if(applescore>bananascore) {
+			System.out.println("A");
+		}else if(bananascore>applescore){
+			System.out.println("B");
+		}else {
+			System.out.println("T");
+		}
+	}
+}
