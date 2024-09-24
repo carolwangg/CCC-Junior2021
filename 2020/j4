@@ -1,0 +1,31 @@
+//cccJ4 Art 2020 by Carol Wang
+//Trial 1
+//Feb 4 2022
+//scored 15/15
+import java.util.Scanner;
+public class Main {
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		
+		String t = input.next();
+		String s = input.next();
+		input.close();
+		
+		String containS = "no";
+		String[] shifts = new String[s.length()];
+		//make array of all anagrams of s
+		for(int i = 0; i<s.length();i++) {
+			shifts[i] = s.substring(i) + s.substring(0,i);
+		}
+		
+		for(int i = 0; i<t.length()-(s.length()-1); i++) {
+			for(int j = 0; j<s.length(); j++) {
+				if(t.substring(i, i+s.length()).equals(shifts[j])) {
+					containS= "yes";
+					break;
+				}
+			}
+		}
+		System.out.println(containS);
+	}
+}
