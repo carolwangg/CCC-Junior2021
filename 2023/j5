@@ -1,0 +1,211 @@
+//J5 CCC 2023 Word Hunt
+//to do: implement rest of grid checks; if(grid[i-1][j-1].equals(word.substring(index, index+1))) 
+//implement edge cases and make sure the function is returning when needed
+//implement turned90degree check
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+//scored 6/15
+
+public class Main {
+	public static String word;
+	public static int count;
+	public static String[][] grid;
+	public static void main(String[] args) throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		word = br.readLine();
+		int r = Integer.parseInt(br.readLine());
+		int c = Integer.parseInt(br.readLine());
+		grid = new String[r][c];
+		String[] rows = new String[r];
+		count = 0;
+		int temp = 0;
+		for(int i = 0; i<r; i++) {
+			rows[i] = br.readLine();
+			grid[i] = rows[i].split(" ");
+		}
+		//check for fst letter
+		//check for next letter in all surroundings
+		//check for next letter in three perpendicular/straight directions
+		boolean[] trueedges = {true, true, true, true, true, true, true, true};
+		//dul, uf, dur, sl, c, sr, ddl, db, ddr
+		for (int i = 0; i < r; i++) {
+			for (int  j = 0; j < c; j++) {
+				if(grid[i][j].equals(word.substring(0,1))) {
+					//make sure it's not in corner
+					checkEdges(trueedges, i, j, 1, false, -1);
+					trueedges[0] = true;
+					trueedges[1] = true;
+					trueedges[2] = true;
+					trueedges[3] = true;
+					trueedges[4] = true;
+					trueedges[5] = true;
+					trueedges[6] = true;
+					trueedges[7] = true;
+				}
+			}
+		}
+		System.out.println(count);
+	}
+	private static void checkEdges(boolean[] edges, int i, int j, int index, boolean turned, int lastdir) {
+		//recursive loop that calls itself to check all branches of possible letters
+		//stops when no more branches or no more letters
+		if(index == word.length()) {
+			count++;
+			return;
+		}
+		int gridlength = grid.length-1;
+		int gridlengths = grid[0].length-1;
+		if(i==0) {
+			edges[0] = false;
+			edges[1] = false;
+			edges[2] = false;
+		}
+		if(i == gridlength) {
+			edges[5] = false;
+			edges[6] = false;
+			edges[7] = false;
+		}
+		if(j==0) {
+			edges[0] = false;
+			edges[3] = false;
+			edges[5] = false;
+		}
+		if(j == gridlengths) {
+			edges[2] = false;
+			edges[4] = false;
+			edges[7] = false;
+		}
+		if(edges[0]) {
+			if(grid[i-1][j-1].equals(word.substring(index, index+1))) {
+				boolean[] temp = {true, false, true, 
+								false, 		false, 
+								false, false, true};
+				boolean turnedtemp = turned;
+				if(lastdir != 0 && lastdir != -1) {
+					turnedtemp = true;
+				}
+				if(turnedtemp) {
+					temp[2] = false;
+					temp[7] = false;
+				}
+				checkEdges(temp,i-1,j-1,index+1, turnedtemp, 0);
+			}
+		}
+		if(edges[1]) {
+			if(grid[i-1][j].equals(word.substring(index, index+1))) {
+				boolean[] temp = {false, true, false, 
+								true, 		true, 
+								false, false, false};
+				boolean turnedtemp = turned;
+				if(lastdir != 1 && lastdir != -1) {
+					turnedtemp = true;
+				}
+				if(turnedtemp) {
+					temp[3] = false;
+					temp[4] = false;
+				}
+				checkEdges(temp,i-1,j,index+1, turnedtemp, 1);
+			}
+		}
+		if(edges[2]) {
+			if(grid[i-1][j+1].equals(word.substring(index, index+1))) {
+				boolean[] temp = {true, false, true, 
+								false, 		false, 
+								false, false, true};
+				boolean turnedtemp = turned;
+				if(lastdir != 2 && lastdir != -1) {
+					turnedtemp = true;
+				}
+				if(turnedtemp) {
+					temp[0] = false;
+					temp[7] = false;
+				}
+				checkEdges(temp,i-1,j+1,index+1, turnedtemp, 2);
+			}
+		}
+		if(edges[3]) {
+			if(grid[i][j-1].equals(word.substring(index, index+1))) {
+				boolean[] temp = {false, true, false, 
+								true, 			false, 
+								false, true, false};
+				boolean turnedtemp = turned;
+				if(lastdir != 3 && lastdir != -1) {
+					turnedtemp = true;
+				}
+				if(turnedtemp) {
+					temp[1] = false;
+					temp[6] = false;
+				}
+				checkEdges(temp,i,j-1,index+1, turnedtemp, 3);
+			}
+		}
+		if(edges[4]) {
+			if(grid[i][j+1].equals(word.substring(index, index+1))) {
+				boolean[] temp = {false, true, false, 
+								false, 			true, 
+								false, true, false};
+				boolean turnedtemp = turned;
+				if(lastdir != 4 && lastdir != -1) {
+					turnedtemp = true;
+				}
+				if(turnedtemp) {
+					temp[1] = false;
+					temp[6] = false;
+				}
+				checkEdges(temp,i,j+1,index+1, turnedtemp, 4);
+			}
+		}
+		if(edges[5]) {
+			if(grid[i+1][j-1].equals(word.substring(index, index+1))) {
+				boolean[] temp = {true, false, false, 
+								false, 			false, 
+								true, false, true};
+				boolean turnedtemp = turned;
+				if(lastdir != 5 && lastdir != -1) {
+					turnedtemp = true;
+				}
+				if(turnedtemp) {
+					temp[2] = false;
+					temp[7] = false;
+				}
+				checkEdges(temp,i+1,j-1,index+1, turnedtemp, 5);
+			}
+		}
+		if(edges[6]) {
+			if(grid[i+1][j].equals(word.substring(index, index+1))) {
+				boolean[] temp = {false, false, false, 
+								true, 			true, 
+								false, true, false};
+				boolean turnedtemp = turned;
+				if(lastdir != 6 && lastdir != -1) {
+					turnedtemp = true;
+				}
+				if(turnedtemp) {
+					temp[3] = false;
+					temp[4] = false;
+				}
+				checkEdges(temp,i+1,j,index+1, turnedtemp, 6);
+			}
+		}
+		if(edges[7]) {
+			if(grid[i+1][j+1].equals(word.substring(index, index+1))) {
+				boolean[] temp = {false, false, true, 
+								false, 			false, 
+								true, false, true};
+				boolean turnedtemp = turned;
+				if(lastdir != 7 && lastdir != -1) {
+					turnedtemp = true;
+				}
+				if(turnedtemp) {
+					temp[2] = false;
+					temp[5] = false;
+				}
+				checkEdges(temp,i+1,j+1,index+1, turnedtemp, 7);
+			}
+		}
+		
+		
+	}
+}
