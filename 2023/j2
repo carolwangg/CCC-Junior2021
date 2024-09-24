@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+//scored 15/15
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		int n = input.nextInt();
+		int t = 0;
+		String p;
+		for(int i = 0; i<n; i++) {
+			p = input.next();
+			if(p.equals("Poblano")) {
+				t+=1500;
+			}else if(p.equals("Mirasol")) {
+				t+=6000;
+			}else if(p.equals("Serrano")) {
+				t+=15500;
+			}else if(p.equals("Cayenne")) {
+				t+=40000;
+			}else if(p.equals("Thai")) {
+				t+=75000;
+			}else if(p.equals("Habanero")) {
+				t+=125000;
+			}
+		}
+		System.out.println(t);;
+	}
+}
