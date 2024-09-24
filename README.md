@@ -1,2 +1,2 @@
-# CCCSenior
-A compilation of Waterloo CCC Senior solutions written in Java.
+# CCC-solutions
+A compilation of my Waterloo CCC solutions written in Java.
