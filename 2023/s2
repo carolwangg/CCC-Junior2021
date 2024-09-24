@@ -1,0 +1,41 @@
+import java.util.Iterator;
+import java.util.Scanner;
+
+#scored 5/15 points
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		int n = input.nextInt();
+		int[] heights = new int[n];
+		int[] abs = new int[n];
+		for (int i = 0; i < n; i++) {
+			heights[i] = input.nextInt();
+		}
+		input.close();
+		int l = 0;
+		int r = 0;
+		int absolute = 0;
+		int min = 0;
+		int kMax = 0;
+		for (int i = 0; i < n; i++) {
+			kMax = n-i;
+			for(int k = 0; k < kMax; k++) {
+				int[] tempAbs = new int[kMax];
+				for (int j = 0; j < (i+1)/2; j++) {
+					l = k+j;
+					r = (k+i)-j;
+					absolute += Math.abs(heights[l] - heights[r]);
+				}
+				tempAbs[k] = absolute;
+				absolute = 0;
+				if(tempAbs[k] < min) {
+					min = tempAbs[k];
+				}
+			}
+			abs[i] = min;
+			min = Integer.MAX_VALUE;
+			System.out.print(abs[i]+" ");
+		}
+	}
+}
