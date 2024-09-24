@@ -1,0 +1,42 @@
+//cccJ3 Art 2020 by Carol Wang
+//Trial 3
+//scored 15/15
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		int n = input.nextInt();
+		int[] x = new int[n];
+		int[] y = new int[n];
+		int maxX = 0;
+		int maxY = 0;
+		int minX = 100;
+		int minY = 100;
+		
+		
+		for (int i = 0; i<n; i++) {
+			String[] lines = input.next().split(",",2);
+			x[i] = Integer.parseInt(lines[0]);
+			y[i] = Integer.parseInt(lines[1]);
+		}
+		for (int i = 0; i<n; i++) {
+			if(x[i]>maxX) {
+				maxX = x[i];
+			}
+			if(y[i]>maxY) {
+				maxY = y[i];
+			}
+			if(x[i]<minX) {
+				minX = x[i];
+			}
+			if(y[i]<minY) {
+				minY = y[i];
+			}
+		}
+		
+		System.out.println((minX-1) + ","+ (minY-1));
+		System.out.println((maxX+1) + ","+ (maxY+1));
+		
+	}
+}
