@@ -1,0 +1,37 @@
+//cccJ2 2021 practice solution by Carol Wang
+//scored 15/15
+import java.util.Scanner;
+public class Main {
+	public static void main(String[]args) {
+		int max = 0;
+		String maxname = "";
+		
+		Scanner input = new Scanner(System.in);
+		int n = input.nextInt();
+		int[] nums = new int[n];
+		String[] names = new String[n];
+		
+		for(int i = 0; i<n; i++) {
+			names[i] = input.next();
+			nums[i] = input.nextInt();
+		}
+		
+		input.close();
+		
+		for(int i = 0; i<n; i++) {
+			//max = Math.max(nums[i], nums[i+1]);
+			if(nums[i]>max) {
+				max = nums[i];
+				maxname = names[i];
+			}
+		}
+		
+		//for(int i = 0; i<n; i++) {
+			//if(max==nums[i]) {
+				//maxname = names[i];
+				//break;
+			//}
+		//}
+		System.out.println(maxname);
+	}
+}
