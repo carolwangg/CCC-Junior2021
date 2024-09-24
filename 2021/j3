@@ -1,0 +1,37 @@
+//cccj32021 trial 2 by Carol Wang
+//Feb 28 2022
+//using ArrayList and variable j instead of function input.nextInt()
+//scored 15/15
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class Main {
+	public static void main(String[] args) {
+		int count = 0;
+		ArrayList<Integer> nums = new ArrayList<Integer>();
+		Scanner input = new Scanner(System.in);
+		int i = input.nextInt();
+		while(i != 99999) {
+			nums.add(i);
+			count++;
+			i = input.nextInt();
+		}
+		input.close();
+		String[] firsttwo = new String[count];
+		int[] lastthree = new int[count];
+		
+		for(int n = 0; n<count; n++) {
+			if((nums.get(n)/10000 + nums.get(n)/1000) %2 == 1) {
+				firsttwo[n] ="left";
+			} else if ((nums.get(n)/10000 + nums.get(n)/1000) %2 == 0 && (nums.get(n)/10000 + nums.get(n)/1000) != 0) {
+				firsttwo[n] ="right";
+			}else if ((nums.get(n)/10000 + (nums.get(n)/1000) == 0)) {
+				firsttwo[n] =firsttwo[n-1];
+			}
+			lastthree[n] = nums.get(n)%1000;
+		}
+		for(int n = 0; n<count; n++) {
+			System.out.println(firsttwo[n]+" "+lastthree[n]);
+		}
+	}
+}
