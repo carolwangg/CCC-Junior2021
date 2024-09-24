@@ -1,0 +1,35 @@
+/*cccJ5 2022 by Carol Wang
+ * Trial 1
+ * scored 3/15
+ */
+
+import java.util.Scanner;
+public class Main {
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		int n = input.nextInt();
+		int t = input.nextInt();
+		int[][] trees = new int[t][2];
+		for (int i = 0; i<t; i++) {
+			for (int j = 0 ; j<2; j++) {
+				trees[i][j] = input.nextInt();
+			}
+			//look left and right of the tree, 
+		}
+		int count = 0;
+		int diff[] = new int[4*t];
+		int maxdiff = 0;
+		for(int i = 0; i < trees.length; i++){
+			for (int j = 0; j < 2; j++) {
+				diff[count] = n - trees[i][j];
+				diff[count+1] = trees[i][0] - 1;
+				count+=2;
+			}
+		}
+		
+		for(int i = 0; i < diff.length; i++){
+			maxdiff = Math.max(maxdiff, diff[i]);
+		}
+		System.out.println(maxdiff);
+	}
+}
