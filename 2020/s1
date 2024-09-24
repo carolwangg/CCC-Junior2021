@@ -1,0 +1,36 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Scanner;
+
+//scored 15/15
+
+public class Main {
+	public static HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		int n = input.nextInt();
+		int[] times = new int[n];
+		for (int i = 0; i < n; i++) {
+			int temp = input.nextInt();
+			times[i] = temp;
+			int temp2 = input.nextInt();
+			map.put(temp, temp2);
+		}
+		input.close();
+		Arrays.sort(times);
+		int timediff = 0;
+		int distdiff = 0;
+		float vel = 0;
+		float maxvel = 0;
+		for (int i = 0; i < times.length-1; i++) {
+			timediff = times[i+1]-times[i];
+			distdiff = Math.abs(map.get(times[i+1])-map.get(times[i]));
+			vel = (float)(distdiff)/(float)(timediff);
+			if(vel > maxvel) {
+				maxvel = vel;
+			}
+		}
+		System.out.println(maxvel);
+	}
+}
