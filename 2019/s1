@@ -1,0 +1,44 @@
+import java.io.PrintWriter;
+import java.util.Iterator;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+//scored 15/15
+
+public class Main {
+	public static void main(String[] args) throws IOException {
+		int[][] paper= {{1, 2},
+					{3, 4}
+		};
+		PrintWriter pw = new PrintWriter(System.out);
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String s = br.readLine();
+		for (int i = 0; i < s.length(); i++) {
+			if(s.substring(i, i+1).equals("H")) {
+				int[] temp = new int[2];
+				temp[0]= paper[0][0];
+				temp[1] = paper[0][1];
+				paper[0][0]= paper[1][0];
+				paper[0][1] = paper[1][1];
+				paper[1][0] = temp[0];
+				paper[1][1] = temp[1];
+			}else {
+				int[] temp = new int[2];
+				temp[0]= paper[0][0];
+				temp[1] = paper[1][0];
+				paper[0][0]= paper[0][1];
+				paper[1][0] = paper[1][1];
+				paper[0][1] = temp[0];
+				paper[1][1] = temp[1];
+			}
+		}
+		for (int i = 0; i < 2; i++) {
+			for (int j = 0; j < 2; j++) {
+				pw.print(paper[i][j]+ " ");
+			}
+			pw.print("\n");
+		}
+		pw.flush();
+	}
+}
